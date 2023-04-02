@@ -28,7 +28,15 @@ graph_Johns_Hopkins = nx.read_graphml(johns_Hopkins)
 
 print("ok")
 
+## Test
 
+#Attributs : gender, dorm,
+
+G = graph_Caltech
+
+print(G.nodes.data())
+
+print(nx.get_node_attributes(G, "major"))
 
 ## Question a
 
@@ -127,8 +135,142 @@ plt.show()
 
 ## Question b
 
-#transitivity
-#average_clustering
+G = graph_Caltech
+print(nx.transitivity(G))
+print(nx.average_clustering(G))
+print(nx.density(G))
+
+
+G = graph_MIT
+print(nx.transitivity(G))
+print(nx.average_clustering(G))
+print(nx.density(G))
+
+G = graph_Johns_Hopkins
+print(nx.transitivity(G))
+print(nx.average_clustering(G))
+print(nx.density(G))
+
+
+## Question c
+
+
+# fig = plt.figure("Degree of graphs", figsize=(8, 8))
+# # Create a gridspec for adding subplots of different sizes
+# axgrid = fig.add_gridspec(5, 4)
+#
+# G = graph_Caltech
+#
+# #degree_sequence = sorted((d for n, d in nx.clustering(G)), reverse=True)
+# #dmax = max(degree_sequence)
+#
+# #ax2 = fig.add_subplot(axgrid[1:3, 1:3])
+# #ax2.bar(*np.unique(degree_sequence, return_counts=True))
+#
+#
+# x = nx.clustering(G)
+# y = G.degree
+# plt.plot(x, y, 'o', color='black');
+#
+#
+# # ax2.set_title("Degree histogram Caltech")
+# # ax2.set_xlabel("Degree")
+# # ax2.set_ylabel("# of Nodes")
+#
+#
+#
+# # G = graph_MIT
+# #
+# # degree_sequence = sorted((d for n, d in G.degree()), reverse=True)
+# # dmax = max(degree_sequence)
+# #
+# # ax2 = fig.add_subplot(axgrid[3:, 2:])
+# # ax2.bar(*np.unique(degree_sequence, return_counts=True))
+# # ax2.set_title("Degree histogram MIT")
+# # ax2.set_xlabel("Degree")
+# # ax2.set_ylabel("# of Nodes")
+# #
+# #
+# #
+# # G = graph_Johns_Hopkins
+# #
+# # degree_sequence = sorted((d for n, d in G.degree()), reverse=True)
+# # dmax = max(degree_sequence)
+# #
+# # ax2 = fig.add_subplot(axgrid[3:, :2])
+# # ax2.bar(*np.unique(degree_sequence, return_counts=True))
+# # ax2.set_title("Degree histogram Johns Hopkins")
+# # ax2.set_xlabel("Degree")
+# # ax2.set_ylabel("# of Nodes")
+#
+# fig.tight_layout()
+# plt.show()
+
+G = graph_Caltech
+
+degree_sequence = sorted((d for n, d in G.degree()), reverse=True)
+local_clust = nx.clustering(G)
+cluster = list(local_clust.values())
+
+
+
+
+fig = plt.figure("Degree of a random graph", figsize=(8, 8))
+# Create a gridspec for adding subplots of different sizes
+axgrid = fig.add_gridspec(5, 4)
+
+ax1 = fig.add_subplot(axgrid[0:, :8])
+plt.plot(degree_sequence, cluster, 'o', linestyle="None")
+#ax1.plot(degree_sequence, "b-", marker="o")
+ax1.set_title("Degree Rank Plot of Caltech students")
+ax1.set_ylabel("Local clustering coefficient")
+ax1.set_xlabel("Degree")
+
+print(degree_sequence)
+
+plt.show()
+
+
+
+
+
+## Autres graphes
+
+american75 = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/American75.graphml"
+
+graph_american75 = nx.read_graphml(american75)
+
+auburn71 = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/Auburn71.graphml"
+
+graph_auburn71 = nx.read_graphml(auburn71)
+
+brown11 = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/Brown11.graphml"
+
+graph_brown11 = nx.read_graphml(brown11)
+
+cornell5 = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/Cornell5.graphml"
+
+graph_cornell5 = nx.read_graphml(cornell5)
+
+duke14 = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/Duke14.graphml"
+
+graph_duke14 = nx.read_graphml(duke14)
+
+harvard1 = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/Harvard1.graphml"
+
+graph_harvard1 = nx.read_graphml(harvard1)
+
+howard90 = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/Howard90.graphml"
+
+graph_howard90 = nx.read_graphml(howard90)
+
+penn94 = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/Penn94.graphml"
+
+graph_penn94 = nx.read_graphml(penn94)
+
+reed98 = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/Reed98.graphml"
+
+graph_reed98 = nx.read_graphml(caltech)
 
 
 

@@ -109,10 +109,10 @@ def labelProg(graph, attribute):
                 attr = []
                 for nei in list(graph.neighbors(node)):
                     attr.append(graph.nodes[str(nei)][attribute])
-                    mostFreq = max(set(attr), key = attr.count)
-                    if(mostFreq != None):
-                        graph.nodes[node][attribute] = mostFreq
-                        changed = True
+                mostFreq = max(set(attr), key = attr.count)
+                if(mostFreq != None):
+                    graph.nodes[node][attribute] = mostFreq
+                    changed = True
         originGraph = graph
         countCorrect = 0
         for node in selectedNodes:

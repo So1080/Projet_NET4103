@@ -4,6 +4,9 @@ import networkx as nx
 import numpy as np
 #import progressbar
 import math
+import copy
+import random
+
 
 
 ## Initialisation des 11 graphes utilisés
@@ -16,11 +19,11 @@ graph_Caltech = nx.read_graphml(caltech)
 
 print("ok")
 
-# mit = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/MIT8.graphml"
-#
-# graph_MIT = nx.read_graphml(mit)
-#
-# print("ok")
+mit = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/MIT8.graphml"
+
+graph_MIT = nx.read_graphml(mit)
+
+print("ok")
 #
 # johns_Hopkins = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/Johns Hopkins55.graphml"
 #
@@ -80,50 +83,57 @@ print("ok")
 
 graphs = [graph_Caltech, graph_MIT, graph_Johns_Hopkins, graph_american75, graph_auburn71, graph_brown11, graph_cornell5, graph_duke14, graph_harvard1, graph_howard90, graph_penn94]
 
-
 ## Execution
 
-import random
-
-def labelProg(graph, attribute):
-    graph_1 = graph
-    nodes = list(graph_1.nodes())
-    F = [0.1, 0.2, 0.3]
-    M = len(nodes)
+def labelProg(graph_name, attribute):
+    G = nx.read_graphml(graph_name)
+    G2 = nx.read_graphml(graph_name)
+    nodes = list(G.nodes())
+    f_list = [0.1, 0.2, 0.3]
 
     res = []
 
-    for f in F:
-        m = math.floor(M * f)
+    for f in f_list:
+        n = math.floor(len(nodes) * f)
         selectedNodes = []
-        for i in range(m):
-            rand = random.randint(0, M - 1)
-            selectedNodes.append(str(rand))
-            graph_1.nodes[str(rand)][attribute] = None
-        changed = True
-        n=0
-        while(changed and n<1000):
-            changed = False
-            n = n+1
-            for node in selectedNodes:
+        for i in range(n):
+            node = random.randint(0, len(nodes) - 1)
+            selectedNodes.append(str(node))
+            G.nodes[str(node)][attribute] = None
+        cont = True
+        n_iter=0
+        while(cont and n_iter<500):
+            cont = False
+            n_iter = n_iter+1
+            for v in selectedNodes:
+                if not list(G.neighbors(v)):
+                    continue
+
                 attr = []
-                for nei in list(graph_1.neighbors(node)):
-                    attr.append(graph_1.nodes[str(nei)][attribute])
-                mostFreq = max(set(attr), key = attr.count)
-                if(mostFreq != None):
-                    graph.nodes[node][attribute] = mostFreq
-                    changed = True
-        originGraph = graph
+                for u in list(G.neighbors(v)):
+                    attr.append(G.nodes[str(u)][attribute])
+                maxFreq = max(set(attr), key = attr.count)
+                if(maxFreq != None):
+                    G.nodes[v][attribute] = maxFreq
+                    cont = True
         countCorrect = 0
-        for node in selectedNodes:
-            if(graph_1.nodes[node][attribute] == originGraph.nodes[node][attribute]):
+        for v in selectedNodes:
+            if(G.nodes[v][attribute] == G2.nodes[v][attribute]):
                 countCorrect = countCorrect + 1
-        res.append(countCorrect/m)
-    print(attribute + " : " + str(res))
+        res.append(countCorrect/n)
+    print(attribute + " : " + str(res) + "\n")
 
 
 
-labelProg(graph_Caltech, "dorm")
-labelProg(graph_Caltech, "major_index")
-labelProg(graph_Caltech, "gender")
+def labelPropagation(graph):
+
+    print("Propagation :")
+    labelProg(graph,"dorm")
+    labelProg(graph,"major_index")
+    labelProg(graph,"gender")
+
+
+
+#labelPropagation(caltech)
+labelPropagation(mit)
 

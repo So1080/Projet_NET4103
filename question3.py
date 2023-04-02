@@ -12,68 +12,67 @@ from sklearn.metrics.cluster import normalized_mutual_info_score
 ## Initialisation des 11 graphes utilisés
 
 
-
-caltech = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/Caltech36.graphml"
+caltech = "../graphs/Caltech36.graphml"
 
 graph_Caltech = nx.read_graphml(caltech)
 
 print("ok")
 
-mit = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/MIT8.graphml"
+mit = "../graphs/MIT8.graphml"
 
 graph_MIT = nx.read_graphml(mit)
 
 print("ok")
 
-johns_Hopkins = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/Johns Hopkins55.graphml"
+johns_Hopkins = "../graphs/Johns Hopkins55.graphml"
 
 graph_Johns_Hopkins = nx.read_graphml(johns_Hopkins)
 
 print("ok")
 
-american75 = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/American75.graphml"
+american75 = "../graphs/American75.graphml"
 
 graph_american75 = nx.read_graphml(american75)
 
 print("ok")
 
-auburn71 = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/Auburn71.graphml"
+auburn71 = "../graphs/Auburn71.graphml"
 
 graph_auburn71 = nx.read_graphml(auburn71)
 
 print("ok")
 
-brown11 = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/Brown11.graphml"
+brown11 = "../graphs/Brown11.graphml"
 
 graph_brown11 = nx.read_graphml(brown11)
 
 print("ok")
 
-cornell5 = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/Cornell5.graphml"
+cornell5 = "../graphs/Cornell5.graphml"
 
 graph_cornell5 = nx.read_graphml(cornell5)
 
 print("ok")
 
-duke14 = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/Duke14.graphml"
+duke14 = "../graphs/Duke14.graphml"
 
 graph_duke14 = nx.read_graphml(duke14)
 
 print("ok")
 
-harvard1 = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/Harvard1.graphml"
+harvard1 = "../graphs/Harvard1.graphml"
 
 graph_harvard1 = nx.read_graphml(harvard1)
 
 print("ok")
 
-howard90 = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/Howard90.graphml"
+howard90 = "../graphs/Howard90.graphml"
 
 graph_howard90 = nx.read_graphml(howard90)
 
 print("ok")
 
-penn94 = "/Users/solyaneberge/TSP/NET4103/projet/Projet_NET4103/graphs/Penn94.graphml"
+penn94 = "../graphs/Penn94.graphml"
 
 graph_penn94 = nx.read_graphml(penn94)
 
@@ -133,17 +132,17 @@ def printAssortativities():
 
     for graph in graphs:
         print("ok")
-        #graph = getGraph(univ[1])
-        sizes.append(graph.size())
-        #studentAss.append(nx.attribute_assortativity_coefficient(graph, "student_fac"))
-        majorAss.append(nx.attribute_assortativity_coefficient(graph, "major_index"))
-        #vertexDegreeAss.append(nx.degree_assortativity_coefficient(graph))
-        #dormAss.append(nx.attribute_assortativity_coefficient(graph, "dorm"))
 
-    #printAssortativityResult(sizes, studentAss, "student")
+        sizes.append(graph.size())
+        studentAss.append(nx.attribute_assortativity_coefficient(graph, "student_fac"))
+        majorAss.append(nx.attribute_assortativity_coefficient(graph, "major_index"))
+        vertexDegreeAss.append(nx.degree_assortativity_coefficient(graph))
+        dormAss.append(nx.attribute_assortativity_coefficient(graph, "dorm"))
+
+    printAssortativityResult(sizes, studentAss, "student")
     printAssortativityResult(sizes, majorAss, "major")
-    #printAssortativityResult(sizes, vertexDegreeAss, "degree")
-    #printAssortativityResult(sizes, dormAss, "dorm")
+    printAssortativityResult(sizes, vertexDegreeAss, "degree")
+    printAssortativityResult(sizes, dormAss, "dorm")
 
 printAssortativities()
 plt.show()
@@ -152,7 +151,25 @@ plt.show()
 
 
 
-## Initialisation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## AUTRE SOLUTION MAIS PAS UTILISÉE FINALEMENT
 
 graph_size = []
 assortativity_student_fac = []

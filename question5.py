@@ -119,11 +119,11 @@ def labelProg(graph, attribute):
             if(graph.nodes[node][attribute] == originGraph.nodes[node][attribute]):
                 countCorrect = countCorrect + 1
         res.append(countCorrect/m)
-    print(attritbute + " : " + str(res))
+    print(attribute + " : " + str(res))
 
 
 
-labelProg(graph_Caltech, 'dorm')
-labelProg(graph_Caltech, 'major_index')
-labelProg(graph_Caltech, 'gender')
+labelProg(graph_Caltech, "dorm")
+labelProg(graph_Caltech, "major_index")
+labelProg(graph_Caltech, "gender")
 

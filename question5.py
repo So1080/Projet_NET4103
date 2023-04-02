@@ -87,7 +87,7 @@ import random
 
 def labelProg(graph, attribute):
     graph_1 = graph
-    nodes = list(graph.nodes())
+    nodes = list(graph_1.nodes())
     F = [0.1, 0.2, 0.3]
     M = len(nodes)
 
@@ -99,7 +99,7 @@ def labelProg(graph, attribute):
         for i in range(m):
             rand = random.randint(0, M - 1)
             selectedNodes.append(str(rand))
-            graph.nodes[str(rand)][attribute] = None
+            graph_1.nodes[str(rand)][attribute] = None
         changed = True
         n=0
         while(changed and n<1000):
@@ -107,8 +107,8 @@ def labelProg(graph, attribute):
             n = n+1
             for node in selectedNodes:
                 attr = []
-                for nei in list(graph.neighbors(node)):
-                    attr.append(graph.nodes[str(nei)][attribute])
+                for nei in list(graph_1.neighbors(node)):
+                    attr.append(graph_1.nodes[str(nei)][attribute])
                 mostFreq = max(set(attr), key = attr.count)
                 if(mostFreq != None):
                     graph.nodes[node][attribute] = mostFreq
@@ -116,7 +116,7 @@ def labelProg(graph, attribute):
         originGraph = graph
         countCorrect = 0
         for node in selectedNodes:
-            if(graph.nodes[node][attribute] == originGraph.nodes[node][attribute]):
+            if(graph_1.nodes[node][attribute] == originGraph.nodes[node][attribute]):
                 countCorrect = countCorrect + 1
         res.append(countCorrect/m)
     print(attribute + " : " + str(res))
